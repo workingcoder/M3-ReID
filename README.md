@@ -128,73 +128,10 @@ pip install -r requirements.txt
 
 ## 📂 Data Preparation
 
-During our experiments, we evaluated the proposed method on two publicly available datasets: **HITSZ-VCM** and **BUPTCampus**, which are commonly used benchmarks for VVI-ReID.
+During our experiments, we evaluated the proposed method on two publicly available datasets: [**HITSZ-VCM**](https://github.com/VCM-project233/HITSZ-VCM-data) and [**BUPTCampus**](https://github.com/dyhBUPT/BUPTCampus), which are benchmarks for VVI-ReID.
 
 **Please download the corresponding datasets from their official sources.** 
 Our code is designed to support their original directory structures. 
-The file organization is shown below for reference:
-
-### 1. HITSZ-VCM Dataset
-```text
-HITSZ-VCM/
-├── Train/                  # Training data
-│   ├── 0001/
-│   │   ├── ir/
-│   │   │   ├── D2/
-│   │   │   │   ├── 1.jpg
-│   │   │   │   ├── 6.jpg
-│   │   │   │   └── ...
-│   │   │   ├── D4/
-│   │   │   └── ...
-│   │   └── rgb/
-│   ├── 0002/
-│   ├── 0003/
-│   └── ...
-├── Test/                   # Testing data
-│   └── ...
-└── info/                   # Metadata files
-    ├── track_train_info.txt
-    ├── track_test_info.txt
-    ├── train_name.txt
-    ├── test_name.txt
-    └── query_IDX.txt
-```
-
-### 2. BUPTCampus Dataset
-```text
-BUPTCampus/
-├── DATA/
-│   ├── 1/
-│   │   ├── IR/
-│   │   │   ├── CQ1/
-│   │   │   │   ├── 1_IR_CQ1_1_8535.jpg
-│   │   │   │   ├── 1_IR_CQ1_1_8536.jpg
-│   │   │   │   └── ...
-│   │   │   ├── G25/
-│   │   │   └── ...
-│   │   ├── RGB/
-│   │   │   ├── CQ1/
-│   │   │   │   ├── 1_RGB_CQ1_1_8535.jpg
-│   │   │   │   ├── 1_RGB_CQ1_1_8536.jpg
-│   │   │   │   └── ...
-│   │   │   ├── G25/
-│   │   │   └── ...
-│   │   └── FakeIR/
-│   │       ├── CQ1/
-│   │       │   ├── 1_RGB_CQ1_1_8535.jpg
-│   │       │   ├── 1_RGB_CQ1_1_8536.jpg
-│   │       │   └── ...
-│   │       ├── G25/
-│   │       └── ...
-│   ├── 2/
-│   ├── 3/
-│   └── ...
-├── data_paths.json
-├── train.txt
-├── train_aux.txt
-├── query.txt
-└── gallery.txt
-```
 
 
 ## 🚀 Training
