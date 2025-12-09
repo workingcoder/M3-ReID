@@ -1,4 +1,4 @@
-# M<sup>3</sup>-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification
+# M³-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification
 
 [![Paper](https://img.shields.io/badge/Paper-IEEE%20TIFS-B6160D?logo=gitbook&logoColor=white)](https://ieeexplore.ieee.org/document/11275868)
 [![Python](https://img.shields.io/badge/python-3.9+-2C5681?logo=python&logoColor=white)](https://www.python.org/)
@@ -7,7 +7,7 @@
 
 This repository contains the **official implementation** of the paper:
 
-[**M<sup>3</sup>-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification** *Accepted by IEEE Transactions on Information Forensics and Security (TIFS), 2025.*](https://ieeexplore.ieee.org/document/11275868)
+[**M³-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification** *Accepted by IEEE Transactions on Information Forensics and Security (TIFS), 2025.*](https://ieeexplore.ieee.org/document/11275868)
 
 By [Tengfei Liang](https://scholar.google.com/citations?user=YE6fPvgAAAAJ),
 [Yi Jin](https://scholar.google.com/citations?user=NQAenU0AAAAJ),
@@ -29,7 +29,7 @@ Video-based visible-infrared person re-identification (VVI-ReID) task focuses on
 It's a challenging task due to three main issues: the difficulty of capturing comprehensive spatio-temporal cues, intra-class variations within video sequences, and inter-modality discrepancies between visible
 and infrared data.
 
-To address these, we propose **M<sup>3</sup>-ReID**, a unified framework that simultaneously handles:
+To address these, we propose **M³-ReID**, a unified framework that simultaneously handles:
 * **Multi-View Learning (MVL):** Captures diverse spatio-temporal patterns (Spatial, Temporal-Width, Temporal-Height views) with the Diverse Attention Constraint.
 * **Multi-Granularity Representation (MGR):** Optimizes features across both fine-grained frame level (with Orthogonal Frame Regularizer) and coarse-grained video level.
 * **Multi-Modality Alignment (MMA):** Explicitly aligns metric learning with cross-modality retrieval goals using a retrieval-oriented contrastive objective.
@@ -279,15 +279,15 @@ Detailed cross-modality retrieval performance is reported below.
 
 | Method | Mode | Rank-1 | Rank-5 | Rank-10 | Rank-20 | mAP |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **M<sup>3</sup>-ReID** | **Visible to Infrared** | **75.31%** | **85.17%** | **88.66%** | **91.43%** | **60.51%** |
-| **M<sup>3</sup>-ReID** | **Infrared to Visible** | **73.21%** | **82.81%** | **86.74%** | **89.70%** | **59.02%** |
+| **M³-ReID** | **Visible to Infrared** | **75.31%** | **85.17%** | **88.66%** | **91.43%** | **60.51%** |
+| **M³-ReID** | **Infrared to Visible** | **73.21%** | **82.81%** | **86.74%** | **89.70%** | **59.02%** |
 
 ### 2. Performance on BUPTCampus
 
 | Method | Mode | Rank-1 | Rank-5 | Rank-10 | Rank-20 | mAP |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **M<sup>3</sup>-ReID** | **Visible to Infrared** | **70.74%** | **85.19%** | **89.44%** | **92.04%** | **63.75%** |
-| **M<sup>3</sup>-ReID** | **Infrared to Visible** | **68.28%** | **85.45%** | **88.99%** | **91.79%** | **64.96%** |
+| **M³-ReID** | **Visible to Infrared** | **70.74%** | **85.19%** | **89.44%** | **92.04%** | **63.75%** |
+| **M³-ReID** | **Infrared to Visible** | **68.28%** | **85.45%** | **88.99%** | **91.79%** | **64.96%** |
 
 *(Results cited from Table I and Table II of the [original paper](https://ieeexplore.ieee.org/document/11275868))*
 
