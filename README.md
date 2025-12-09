@@ -1,13 +1,13 @@
-# M$^3$-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification
+# M<sup>3</sup>-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification
 
-[![Paper](https://img.shields.io/badge/Paper-IEEE%20TIFS-00629B?logo=gitbook&logoColor=white)](https://ieeexplore.ieee.org/document/11275868)
-[![Python](https://img.shields.io/badge/python-3.9+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-MIT-green?logo=opensourceinitiative&logoColor=white)](./LICENSE)
+[![Paper](https://img.shields.io/badge/Paper-IEEE%20TIFS-B6160D?logo=gitbook&logoColor=white)](https://ieeexplore.ieee.org/document/11275868)
+[![Python](https://img.shields.io/badge/python-3.9+-2C5681?logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-D93011?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![License](https://img.shields.io/badge/License-MIT-3DA639?logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
 This repository contains the **official implementation** of the paper:
 
-[**M$^3$-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification** *Accepted by IEEE Transactions on Information Forensics and Security (TIFS), 2025.*](https://ieeexplore.ieee.org/document/11275868)
+[**M<sup>3</sup>-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification** *Accepted by IEEE Transactions on Information Forensics and Security (TIFS), 2025.*](https://ieeexplore.ieee.org/document/11275868)
 
 By [Tengfei Liang](https://scholar.google.com/citations?user=YE6fPvgAAAAJ),
 [Yi Jin](https://scholar.google.com/citations?user=NQAenU0AAAAJ),
@@ -20,7 +20,7 @@ By [Tengfei Liang](https://scholar.google.com/citations?user=YE6fPvgAAAAJ),
 *Notes:*
 This repository offers the complete implementation of the method, featuring a well-organized directory structure and detailed comments that facilitate model training and testing. 
 Moreover, the codebase is designed to be easy to extend, allowing users to quickly adapt or build upon the existing framework. 
-It is hoped that this work can serve as a **new strong and simple baseline** for video-based visible–infrared person re-identification and further contribute to the advancement of the VVI-ReID field.
+It is hoped that this work can serve as a **new strong and simple baseline** for video-based visible–infrared person re-identification and further contribute to the advancement of the VVI-ReID field
 
 
 ## 📖 Introduction
@@ -29,7 +29,7 @@ Video-based visible-infrared person re-identification (VVI-ReID) task focuses on
 It's a challenging task due to three main issues: the difficulty of capturing comprehensive spatio-temporal cues, intra-class variations within video sequences, and inter-modality discrepancies between visible
 and infrared data.
 
-To address these, we propose **M$^3$-ReID**, a unified framework that simultaneously handles:
+To address these, we propose **M<sup>3</sup>-ReID**, a unified framework that simultaneously handles:
 * **Multi-View Learning (MVL):** Captures diverse spatio-temporal patterns (Spatial, Temporal-Width, Temporal-Height views) with the Diverse Attention Constraint.
 * **Multi-Granularity Representation (MGR):** Optimizes features across both fine-grained frame level (with Orthogonal Frame Regularizer) and coarse-grained video level.
 * **Multi-Modality Alignment (MMA):** Explicitly aligns metric learning with cross-modality retrieval goals using a retrieval-oriented contrastive objective.
@@ -43,10 +43,10 @@ The codebase is organized into modular components to facilitate understanding an
 ```text
 M3-ReID/
 ├── data/                       # Data Pipeline
-│   ├── manager.py              # DataManager: Parses raw dataset structures (HITSZ-VCM/BUPTCampus)
-│   ├── dataset.py              # VideoVIDataset: Handles video sequence loading and sampling
-│   ├── sampler.py              # Diverse sampling strategies (PxK, Cross-Modality, Identity-Balanced, etc.)
-│   └── transform.py            # Custom transforms (Sync-Augmentation, WeightedGrayscale, StyleVariation)
+│   ├── manager.py              # DataManager: Parses raw data (HITSZ-VCM/BUPTCampus)
+│   ├── dataset.py              # VideoVIDataset: Handles video loading and sampling
+│   ├── sampler.py              # Diverse sampling strategies
+│   └── transform.py            # Custom transforms
 ├── losses/                     # Loss Functions
 │   ├── mma_loss.py             # Multi-Modality Alignment (MMA) Loss
 │   └── sep_loss.py             # Separation Loss (Used for OFR and DAC)
@@ -279,15 +279,15 @@ Detailed cross-modality retrieval performance is reported below.
 
 | Method | Mode | Rank-1 | Rank-5 | Rank-10 | Rank-20 | mAP |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **M$^3$-ReID** | **Visible to Infrared** | **75.31%** | **85.17%** | **88.66%** | **91.43%** | **60.51%** |
-| **M$^3$-ReID** | **Infrared to Visible** | **73.21%** | **82.81%** | **86.74%** | **89.70%** | **59.02%** |
+| **M<sup>3</sup>-ReID** | **Visible to Infrared** | **75.31%** | **85.17%** | **88.66%** | **91.43%** | **60.51%** |
+| **M<sup>3</sup>-ReID** | **Infrared to Visible** | **73.21%** | **82.81%** | **86.74%** | **89.70%** | **59.02%** |
 
 ### 2. Performance on BUPTCampus
 
 | Method | Mode | Rank-1 | Rank-5 | Rank-10 | Rank-20 | mAP |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **M$^3$-ReID** | **Visible to Infrared** | **70.74%** | **85.19%** | **89.44%** | **92.04%** | **63.75%** |
-| **M$^3$-ReID** | **Infrared to Visible** | **68.28%** | **85.45%** | **88.99%** | **91.79%** | **64.96%** |
+| **M<sup>3</sup>-ReID** | **Visible to Infrared** | **70.74%** | **85.19%** | **89.44%** | **92.04%** | **63.75%** |
+| **M<sup>3</sup>-ReID** | **Infrared to Visible** | **68.28%** | **85.45%** | **88.99%** | **91.79%** | **64.96%** |
 
 *(Results cited from Table I and Table II of the [original paper](https://ieeexplore.ieee.org/document/11275868))*
 
@@ -374,7 +374,8 @@ If you find this code or paper useful for your research, please cite:
              Xianjia Meng and
              Tao Wang and
              Yidong Li},
-  title   = {M$^3$-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification},
+  title   = {M$^3$-ReID: Unifying Multi-View, Granularity, and Modality 
+             for Video-Based Visible-Infrared Person Re-Identification},
   journal = {IEEE Transactions on Information Forensics and Security},
   year    = {2025}
 }
