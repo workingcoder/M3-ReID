@@ -111,7 +111,7 @@ if __name__ == '__main__':
     model = M3ReID(sample_seq_num, num_train_class).cuda()
 
     if args.resume:
-        checkpoint = torch.load(args.resume, weights_only=True, map_location=torch.device('cuda'))
+        checkpoint = torch.load(args.resume, map_location=torch.device('cuda'))
         for key in list(checkpoint.keys()):
             model_state_dict = model.state_dict()
             if key in model_state_dict:
@@ -218,3 +218,4 @@ if __name__ == '__main__':
 
     # Save -------------------------------------------------------------------------------------------------------------
     torch.save(model.state_dict(), os.path.join(modelckpt_dir, f'model.pth'))
+
