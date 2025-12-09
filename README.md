@@ -20,7 +20,7 @@ By [Tengfei Liang](https://scholar.google.com/citations?user=YE6fPvgAAAAJ),
 *Notes:*
 This repository offers the complete implementation of the method, featuring a well-organized directory structure and detailed comments that facilitate model training and testing. 
 Moreover, the codebase is designed to be easy to extend, allowing users to quickly adapt or build upon the existing framework. 
-It is hoped that this work can serve as a **new strong and simple baseline** for video-based visible–infrared person re-identification and further contribute to the advancement of the VVI-ReID field
+It is hoped that this work can serve as a **new strong and simple baseline** for video-based visible–infrared person re-identification and further contribute to the advancement of the VVI-ReID field.
 
 
 ## 📖 Introduction
