@@ -22,7 +22,6 @@ This repository offers the complete implementation of the method, featuring a we
 Moreover, the codebase is designed to be easy to extend, allowing users to quickly adapt or build upon the existing framework. 
 It is hoped that this work can serve as a **new strong and simple baseline** for video-based visible–infrared person re-identification and further contribute to the advancement of the VVI-ReID field.
 
----
 
 ## 📖 Introduction
 
@@ -36,6 +35,47 @@ To address these, we propose **M$^3$-ReID**, a unified framework that simultaneo
 * **Multi-Modality Alignment (MMA):** Explicitly aligns metric learning with cross-modality retrieval goals using a retrieval-oriented contrastive objective.
 
 ![Architecture](figs/m3reid_architecture.png)
+
+## 🧱 Code Structure
+
+The codebase is organized into modular components to facilitate understanding and maintenance.
+
+```text
+M3-ReID/
+├── data/                       # Data Pipeline
+│   ├── manager.py              # DataManager: Parses raw dataset structures (HITSZ-VCM/BUPTCampus)
+│   ├── dataset.py              # VideoVIDataset: Handles video sequence loading and sampling
+│   ├── sampler.py              # Diverse sampling strategies (PxK, Cross-Modality, Identity-Balanced, etc.)
+│   └── transform.py            # Custom transforms (Sync-Augmentation, WeightedGrayscale, StyleVariation)
+├── losses/                     # Loss Functions
+│   ├── mma_loss.py             # Multi-Modality Alignment (MMA) Loss
+│   └── sep_loss.py             # Separation Loss (Used for OFR and DAC)
+├── models/                     # Model Definitions
+│   ├── backbones/              # Backbone Networks
+│   │   └── resnet.py           # ResNet backbone implementation (FC layers removed)
+│   ├── modules/                # Custom Modules
+│   │   ├── mvl_attention.py    # Multi-View Learning (MVL) Attention module
+│   │   ├── non_local.py        # Spatio-Temporal Non-Local Block
+│   │   └── normalize.py        # Feature Normalization layer
+│   └── model_m3reid.py         # The M3-ReID architecture definition
+├── tools/                      # Utilities
+│   ├── eval_metrics.py         # Evaluation (CMC, mAP, mINP)
+│   └── utils.py                # Logger, random seed, path handling
+├── train_m3reid.py             # Training Entry Point
+└── test_m3reid.py              # Evaluation Entry Point
+```
+
+### Key Features
+
+We have implemented several engineering optimizations to ensure robustness, efficiency, and extensibility:
+
+* **🧩 Modular & Extensible Design**: The framework decouples the Data, Model, and Loss components. You can easily plug in new backbones, custom losses, or optimization strategies with minimal changes to the core codebase.
+* **🎞️ Synchronized Video Augmentation**: Unlike previous VVI-ReID methods that often overlook temporal consistency during augmentation, our `SyncTrackTransform` ensures that random operations (e.g., cropping, flipping, erasing) are applied **identically across all frames** within a video tracklet. This preserves temporal coherence and avoids introducing artificial jitter noise that could confuse the temporal learning modules.
+* **🎨 Rich Sampling Strategies**: `sampler.py` provides diverse sampling logic, including standard PxK sampling, **Identity-Balanced Cross-Modality sampling** (guaranteeing half IR / half RGB per batch), and random sampling, satisfying various training requirements.
+* **🔥 Mixed Precision Training**: The training loop natively supports **Automatic Mixed Precision (AMP)** (`--fp16`), allowing for reduced GPU memory usage and faster training throughput without compromising performance.
+* **📈 Comprehensive Logging**: We provide a dual-logging system that simultaneously records training progress to **console**, **text files**, and **TensorBoard**. This makes it easy to monitor loss curves and accuracy in real-time.
+* **🔋 GPU-Based Metric Calculation**: The evaluation script (`eval_metrics.py`) computes CMC, mAP, and mINP entirely on the **GPU**. This significantly accelerates the evaluation process, especially for large-scale gallery sets, compared to traditional CPU-based implementations.
+
 
 ## 🛠️ Installation
 
@@ -85,49 +125,6 @@ Note that the provided [requirements.txt](./requirements.txt) is intended as a r
 pip install -r requirements.txt
 ```
 
----
-
-## 🧱 Code Structure
-
-The codebase is organized into modular components to facilitate understanding and maintenance.
-
-```text
-M3-ReID/
-├── data/                       # Data Pipeline
-│   ├── manager.py              # DataManager: Parses raw dataset structures (HITSZ-VCM/BUPTCampus)
-│   ├── dataset.py              # VideoVIDataset: Handles video sequence loading and sampling
-│   ├── sampler.py              # Diverse sampling strategies (PxK, Cross-Modality, Identity-Balanced, etc.)
-│   └── transform.py            # Custom transforms (Sync-Augmentation, WeightedGrayscale, StyleVariation)
-├── losses/                     # Loss Functions
-│   ├── mma_loss.py             # Multi-Modality Alignment (MMA) Loss
-│   └── sep_loss.py             # Separation Loss (Used for OFR and DAC)
-├── models/                     # Model Definitions
-│   ├── backbones/              # Backbone Networks
-│   │   └── resnet.py           # ResNet backbone implementation (FC layers removed)
-│   ├── modules/                # Custom Modules
-│   │   ├── mvl_attention.py    # Multi-View Learning (MVL) Attention module
-│   │   ├── non_local.py        # Spatio-Temporal Non-Local Block
-│   │   └── normalize.py        # Feature Normalization layer
-│   └── model_m3reid.py         # The M3-ReID architecture definition
-├── tools/                      # Utilities
-│   ├── eval_metrics.py         # Evaluation (CMC, mAP, mINP)
-│   └── utils.py                # Logger, random seed, path handling
-├── train_m3reid.py             # Training Entry Point
-└── test_m3reid.py              # Evaluation Entry Point
-```
-
-### Key Features
-
-We have implemented several engineering optimizations to ensure robustness, efficiency, and extensibility:
-
-* **🧩 Modular & Extensible Design**: The framework decouples the Data, Model, and Loss components. You can easily plug in new backbones, custom losses, or optimization strategies with minimal changes to the core codebase.
-* **🎞️ Synchronized Video Augmentation**: Unlike previous VVI-ReID methods that often overlook temporal consistency during augmentation, our `SyncTrackTransform` ensures that random operations (e.g., cropping, flipping, erasing) are applied **identically across all frames** within a video tracklet. This preserves temporal coherence and avoids introducing artificial jitter noise that could confuse the temporal learning modules.
-* **🎨 Rich Sampling Strategies**: `sampler.py` provides diverse sampling logic, including standard PxK sampling, **Identity-Balanced Cross-Modality sampling** (guaranteeing half IR / half RGB per batch), and random sampling, satisfying various training requirements.
-* **🔥 Mixed Precision Training**: The training loop natively supports **Automatic Mixed Precision (AMP)** (`--fp16`), allowing for reduced GPU memory usage and faster training throughput without compromising performance.
-* **📈 Comprehensive Logging**: We provide a dual-logging system that simultaneously records training progress to **console**, **text files**, and **TensorBoard**. This makes it easy to monitor loss curves and accuracy in real-time.
-* **🔋 GPU-Based Metric Calculation**: The evaluation script (`eval_metrics.py`) computes CMC, mAP, and mINP entirely on the **GPU**. This significantly accelerates the evaluation process, especially for large-scale gallery sets, compared to traditional CPU-based implementations.
-
----
 
 ## 📂 Data Preparation
 
@@ -199,7 +196,6 @@ BUPTCampus/
 └── gallery.txt
 ```
 
----
 
 ## 🚀 Training
 
@@ -288,7 +284,6 @@ tensorboard --logdir ckptlog/HITSZVCM/ --port 6006
 # Then open http://localhost:6006 in your browser to view the curves
 ```
 
----
 
 ## ⚡ Evaluation
 
@@ -337,7 +332,6 @@ python test_m3reid.py \
     --gpu 0
 ```
 
----
 
 ## 📊 Results
 
@@ -360,7 +354,6 @@ Detailed cross-modality retrieval performance is reported below.
 
 *(Results cited from Table I and Table II of the [original paper](https://ieeexplore.ieee.org/document/11275868))*
 
----
 
 ## 🔧 Quickstart: How to Develop Your Own Method
 
@@ -430,7 +423,6 @@ python test_yourmethod.py --dataset HITSZVCM ...
 
 Enjoy your research journey!
 
----
 
 ## 📝 Citation
 
@@ -451,7 +443,6 @@ If you find this code or paper useful for your research, please cite:
 }
 ```
 
----
 
 ## 📄 License
 
