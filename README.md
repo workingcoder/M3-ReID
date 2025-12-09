@@ -7,7 +7,7 @@
 
 This repository contains the **official implementation** of the paper:
 
-[**M³-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification** *Accepted by IEEE Transactions on Information Forensics and Security (TIFS), 2025.*](https://ieeexplore.ieee.org/document/11275868)
+[**M³-ReID: Unifying Multi-View, Granularity, and Modality for Video-Based Visible-Infrared Person Re-Identification**, *Accepted by IEEE Transactions on Information Forensics and Security (TIFS), 2025.*](https://ieeexplore.ieee.org/document/11275868)
 
 By [Tengfei Liang](https://scholar.google.com/citations?user=YE6fPvgAAAAJ),
 [Yi Jin](https://scholar.google.com/citations?user=NQAenU0AAAAJ),
